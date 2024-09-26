@@ -1,0 +1,21 @@
+# Autopkgtest only, packages are tested during build by
+# debian/nodejs/**/test
+set -e
+
+if [ "$AUTOPKGTEST_TMP" != "" ]; then
+	for m in debug escodegen esprima fs-extra ip netmask proxy-from-env retry ts-jest tslib @types/jest @types/retry @types/ws ws; do
+		pkgjs-ln $m || true
+	done
+	make -f debian/rules generate-cert
+	mkdir -p node_modules
+	ln -s ../packages/tsconfig node_modules/
+	for i in `ls debian/nodejs/packages/`; do
+		(
+		NAME=`pkgjs-pjson packages/$i name`
+		cd packages/$i
+		rm -rf dist
+		ln -s /usr/share/nodejs/$NAME/dist
+		sh -ex ../../debian/nodejs/packages/$i/test
+		)
+	done
+fi

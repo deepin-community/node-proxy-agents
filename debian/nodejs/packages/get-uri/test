@@ -1,0 +1,1 @@
+jest --env node test/test.test.ts test/data.test.ts test/file.test.ts

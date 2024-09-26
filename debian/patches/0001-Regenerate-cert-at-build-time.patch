@@ -1,0 +1,267 @@
+From: Debian Javascript Maintainers
+ <pkg-javascript-devel@lists.alioth.debian.org>
+Date: Thu, 1 Aug 2024 09:28:06 +0000
+Subject: Regenerate cert at build time
+
+forwarded: not-needed
+---
+ packages/agent-base/test/ssl-cert-snakeoil.key        | 15 ---------------
+ packages/agent-base/test/ssl-cert-snakeoil.pem        | 12 ------------
+ packages/http-proxy-agent/test/ssl-cert-snakeoil.key  | 15 ---------------
+ packages/http-proxy-agent/test/ssl-cert-snakeoil.pem  | 12 ------------
+ packages/https-proxy-agent/test/ssl-cert-snakeoil.key | 15 ---------------
+ packages/https-proxy-agent/test/ssl-cert-snakeoil.pem | 12 ------------
+ packages/pac-proxy-agent/test/ssl-cert-snakeoil.key   | 15 ---------------
+ packages/pac-proxy-agent/test/ssl-cert-snakeoil.pem   | 12 ------------
+ packages/proxy-agent/test/ssl-cert-snakeoil.key       | 15 ---------------
+ packages/proxy-agent/test/ssl-cert-snakeoil.pem       | 12 ------------
+ packages/socks-proxy-agent/test/ssl-cert-snakeoil.key | 15 ---------------
+ packages/socks-proxy-agent/test/ssl-cert-snakeoil.pem | 12 ------------
+ 12 files changed, 162 deletions(-)
+ delete mode 100644 packages/agent-base/test/ssl-cert-snakeoil.key
+ delete mode 100644 packages/agent-base/test/ssl-cert-snakeoil.pem
+ delete mode 100644 packages/http-proxy-agent/test/ssl-cert-snakeoil.key
+ delete mode 100644 packages/http-proxy-agent/test/ssl-cert-snakeoil.pem
+ delete mode 100644 packages/https-proxy-agent/test/ssl-cert-snakeoil.key
+ delete mode 100644 packages/https-proxy-agent/test/ssl-cert-snakeoil.pem
+ delete mode 100644 packages/pac-proxy-agent/test/ssl-cert-snakeoil.key
+ delete mode 100644 packages/pac-proxy-agent/test/ssl-cert-snakeoil.pem
+ delete mode 100644 packages/proxy-agent/test/ssl-cert-snakeoil.key
+ delete mode 100644 packages/proxy-agent/test/ssl-cert-snakeoil.pem
+ delete mode 100644 packages/socks-proxy-agent/test/ssl-cert-snakeoil.key
+ delete mode 100644 packages/socks-proxy-agent/test/ssl-cert-snakeoil.pem
+
+diff --git a/packages/agent-base/test/ssl-cert-snakeoil.key b/packages/agent-base/test/ssl-cert-snakeoil.key
+deleted file mode 100644
+index fd12501..0000000
+--- a/packages/agent-base/test/ssl-cert-snakeoil.key
++++ /dev/null
+@@ -1,15 +0,0 @@
+------BEGIN RSA PRIVATE KEY-----
+-MIICWwIBAAKBgQCzURxIqzer0ACAbX/lHdsn4Gd9PLKrf7EeDYfIdV0HZKPD8WDr
+-bBx2/fBu0OW2sjnzv/SVZbJ0DAuPE/p0+eT0qb2qC10iz9iTD7ribd7gxhirVb8y
+-b3fBjXsxc8V8p4Ny1LcvNSqCjwUbJqdRogfoJeTiqPM58z5sNzuv5iq7iwIDAQAB
+-AoGAPMQy4olrP0UotlzlJ36bowLP70ffgHCwU+/f4NWs5fF78c3du0oSx1w820Dd
+-Z7E0JF8bgnlJJTxjumPZz0RUCugrEHBKJmzEz3cxF5E3+7NvteZcjKn9D67RrM5x
+-1/uSZ9cqKE9cYvY4fSuHx18diyZ4axR/wB1Pea2utjjDM+ECQQDb9ZbmmaWMiRpQ
+-5Up+loxP7BZNPsEVsm+DVJmEFbaFgGfncWBqSIqnPNjMwTwj0OigTwCAEGPkfRVW
+-T0pbYWCxAkEA0LK7SCTwzyDmhASUalk0x+3uCAA6ryFdwJf/wd8TRAvVOmkTEldX
+-uJ7ldLvfrONYO3v56uKTU/SoNdZYzKtO+wJAX2KM4ctXYy5BXztPpr2acz4qHa1N
+-Bh+vBAC34fOYhyQ76r3b1btHhWZ5jbFuZwm9F2erC94Ps5IaoqcX07DSwQJAPKGw
+-h2U0EPkd/3zVIZCJJQya+vgWFIs9EZcXVtvYXQyTBkVApTN66MhBIYjzkub5205J
+-bVQmOV37AKklY1DhwQJAA1wos0cYxro02edzatxd0DIR2r4qqOqLkw6BhYHhq6HJ
+-ZvIcQkHqdSXzdETFc01I1znDGGIrJHcnvKWgBPoEUg==
+------END RSA PRIVATE KEY-----
+diff --git a/packages/agent-base/test/ssl-cert-snakeoil.pem b/packages/agent-base/test/ssl-cert-snakeoil.pem
+deleted file mode 100644
+index b115a5e..0000000
+--- a/packages/agent-base/test/ssl-cert-snakeoil.pem
++++ /dev/null
+@@ -1,12 +0,0 @@
+------BEGIN CERTIFICATE-----
+-MIIB1TCCAT4CCQDV5mPlzm9+izANBgkqhkiG9w0BAQUFADAvMS0wKwYDVQQDEyQ3
+-NTI3YmQ3Ny1hYjNlLTQ3NGItYWNlNy1lZWQ2MDUzOTMxZTcwHhcNMTUwNzA2MjI0
+-NTA3WhcNMjUwNzAzMjI0NTA3WjAvMS0wKwYDVQQDEyQ3NTI3YmQ3Ny1hYjNlLTQ3
+-NGItYWNlNy1lZWQ2MDUzOTMxZTcwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGB
+-ALNRHEirN6vQAIBtf+Ud2yfgZ308sqt/sR4Nh8h1XQdko8PxYOtsHHb98G7Q5bay
+-OfO/9JVlsnQMC48T+nT55PSpvaoLXSLP2JMPuuJt3uDGGKtVvzJvd8GNezFzxXyn
+-g3LUty81KoKPBRsmp1GiB+gl5OKo8znzPmw3O6/mKruLAgMBAAEwDQYJKoZIhvcN
+-AQEFBQADgYEACzoHUF8UV2Z6541Q2wKEA0UFUzmUjf/E1XwBO+1P15ZZ64uw34B4
+-1RwMPtAo9RY/PmICTWtNxWGxkzwb2JtDWtnxVER/lF8k2XcXPE76fxTHJF/BKk9J
+-QU8OTD1dd9gHCBviQB9TqntRZ5X7axjtuWjb2umY+owBYzAHZkp1HKI=
+------END CERTIFICATE-----
+diff --git a/packages/http-proxy-agent/test/ssl-cert-snakeoil.key b/packages/http-proxy-agent/test/ssl-cert-snakeoil.key
+deleted file mode 100644
+index fd12501..0000000
+--- a/packages/http-proxy-agent/test/ssl-cert-snakeoil.key
++++ /dev/null
+@@ -1,15 +0,0 @@
+------BEGIN RSA PRIVATE KEY-----
+-MIICWwIBAAKBgQCzURxIqzer0ACAbX/lHdsn4Gd9PLKrf7EeDYfIdV0HZKPD8WDr
+-bBx2/fBu0OW2sjnzv/SVZbJ0DAuPE/p0+eT0qb2qC10iz9iTD7ribd7gxhirVb8y
+-b3fBjXsxc8V8p4Ny1LcvNSqCjwUbJqdRogfoJeTiqPM58z5sNzuv5iq7iwIDAQAB
+-AoGAPMQy4olrP0UotlzlJ36bowLP70ffgHCwU+/f4NWs5fF78c3du0oSx1w820Dd
+-Z7E0JF8bgnlJJTxjumPZz0RUCugrEHBKJmzEz3cxF5E3+7NvteZcjKn9D67RrM5x
+-1/uSZ9cqKE9cYvY4fSuHx18diyZ4axR/wB1Pea2utjjDM+ECQQDb9ZbmmaWMiRpQ
+-5Up+loxP7BZNPsEVsm+DVJmEFbaFgGfncWBqSIqnPNjMwTwj0OigTwCAEGPkfRVW
+-T0pbYWCxAkEA0LK7SCTwzyDmhASUalk0x+3uCAA6ryFdwJf/wd8TRAvVOmkTEldX
+-uJ7ldLvfrONYO3v56uKTU/SoNdZYzKtO+wJAX2KM4ctXYy5BXztPpr2acz4qHa1N
+-Bh+vBAC34fOYhyQ76r3b1btHhWZ5jbFuZwm9F2erC94Ps5IaoqcX07DSwQJAPKGw
+-h2U0EPkd/3zVIZCJJQya+vgWFIs9EZcXVtvYXQyTBkVApTN66MhBIYjzkub5205J
+-bVQmOV37AKklY1DhwQJAA1wos0cYxro02edzatxd0DIR2r4qqOqLkw6BhYHhq6HJ
+-ZvIcQkHqdSXzdETFc01I1znDGGIrJHcnvKWgBPoEUg==
+------END RSA PRIVATE KEY-----
+diff --git a/packages/http-proxy-agent/test/ssl-cert-snakeoil.pem b/packages/http-proxy-agent/test/ssl-cert-snakeoil.pem
+deleted file mode 100644
+index b115a5e..0000000
+--- a/packages/http-proxy-agent/test/ssl-cert-snakeoil.pem
++++ /dev/null
+@@ -1,12 +0,0 @@
+------BEGIN CERTIFICATE-----
+-MIIB1TCCAT4CCQDV5mPlzm9+izANBgkqhkiG9w0BAQUFADAvMS0wKwYDVQQDEyQ3
+-NTI3YmQ3Ny1hYjNlLTQ3NGItYWNlNy1lZWQ2MDUzOTMxZTcwHhcNMTUwNzA2MjI0
+-NTA3WhcNMjUwNzAzMjI0NTA3WjAvMS0wKwYDVQQDEyQ3NTI3YmQ3Ny1hYjNlLTQ3
+-NGItYWNlNy1lZWQ2MDUzOTMxZTcwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGB
+-ALNRHEirN6vQAIBtf+Ud2yfgZ308sqt/sR4Nh8h1XQdko8PxYOtsHHb98G7Q5bay
+-OfO/9JVlsnQMC48T+nT55PSpvaoLXSLP2JMPuuJt3uDGGKtVvzJvd8GNezFzxXyn
+-g3LUty81KoKPBRsmp1GiB+gl5OKo8znzPmw3O6/mKruLAgMBAAEwDQYJKoZIhvcN
+-AQEFBQADgYEACzoHUF8UV2Z6541Q2wKEA0UFUzmUjf/E1XwBO+1P15ZZ64uw34B4
+-1RwMPtAo9RY/PmICTWtNxWGxkzwb2JtDWtnxVER/lF8k2XcXPE76fxTHJF/BKk9J
+-QU8OTD1dd9gHCBviQB9TqntRZ5X7axjtuWjb2umY+owBYzAHZkp1HKI=
+------END CERTIFICATE-----
+diff --git a/packages/https-proxy-agent/test/ssl-cert-snakeoil.key b/packages/https-proxy-agent/test/ssl-cert-snakeoil.key
+deleted file mode 100644
+index fd12501..0000000
+--- a/packages/https-proxy-agent/test/ssl-cert-snakeoil.key
++++ /dev/null
+@@ -1,15 +0,0 @@
+------BEGIN RSA PRIVATE KEY-----
+-MIICWwIBAAKBgQCzURxIqzer0ACAbX/lHdsn4Gd9PLKrf7EeDYfIdV0HZKPD8WDr
+-bBx2/fBu0OW2sjnzv/SVZbJ0DAuPE/p0+eT0qb2qC10iz9iTD7ribd7gxhirVb8y
+-b3fBjXsxc8V8p4Ny1LcvNSqCjwUbJqdRogfoJeTiqPM58z5sNzuv5iq7iwIDAQAB
+-AoGAPMQy4olrP0UotlzlJ36bowLP70ffgHCwU+/f4NWs5fF78c3du0oSx1w820Dd
+-Z7E0JF8bgnlJJTxjumPZz0RUCugrEHBKJmzEz3cxF5E3+7NvteZcjKn9D67RrM5x
+-1/uSZ9cqKE9cYvY4fSuHx18diyZ4axR/wB1Pea2utjjDM+ECQQDb9ZbmmaWMiRpQ
+-5Up+loxP7BZNPsEVsm+DVJmEFbaFgGfncWBqSIqnPNjMwTwj0OigTwCAEGPkfRVW
+-T0pbYWCxAkEA0LK7SCTwzyDmhASUalk0x+3uCAA6ryFdwJf/wd8TRAvVOmkTEldX
+-uJ7ldLvfrONYO3v56uKTU/SoNdZYzKtO+wJAX2KM4ctXYy5BXztPpr2acz4qHa1N
+-Bh+vBAC34fOYhyQ76r3b1btHhWZ5jbFuZwm9F2erC94Ps5IaoqcX07DSwQJAPKGw
+-h2U0EPkd/3zVIZCJJQya+vgWFIs9EZcXVtvYXQyTBkVApTN66MhBIYjzkub5205J
+-bVQmOV37AKklY1DhwQJAA1wos0cYxro02edzatxd0DIR2r4qqOqLkw6BhYHhq6HJ
+-ZvIcQkHqdSXzdETFc01I1znDGGIrJHcnvKWgBPoEUg==
+------END RSA PRIVATE KEY-----
+diff --git a/packages/https-proxy-agent/test/ssl-cert-snakeoil.pem b/packages/https-proxy-agent/test/ssl-cert-snakeoil.pem
+deleted file mode 100644
+index b115a5e..0000000
+--- a/packages/https-proxy-agent/test/ssl-cert-snakeoil.pem
++++ /dev/null
+@@ -1,12 +0,0 @@
+------BEGIN CERTIFICATE-----
+-MIIB1TCCAT4CCQDV5mPlzm9+izANBgkqhkiG9w0BAQUFADAvMS0wKwYDVQQDEyQ3
+-NTI3YmQ3Ny1hYjNlLTQ3NGItYWNlNy1lZWQ2MDUzOTMxZTcwHhcNMTUwNzA2MjI0
+-NTA3WhcNMjUwNzAzMjI0NTA3WjAvMS0wKwYDVQQDEyQ3NTI3YmQ3Ny1hYjNlLTQ3
+-NGItYWNlNy1lZWQ2MDUzOTMxZTcwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGB
+-ALNRHEirN6vQAIBtf+Ud2yfgZ308sqt/sR4Nh8h1XQdko8PxYOtsHHb98G7Q5bay
+-OfO/9JVlsnQMC48T+nT55PSpvaoLXSLP2JMPuuJt3uDGGKtVvzJvd8GNezFzxXyn
+-g3LUty81KoKPBRsmp1GiB+gl5OKo8znzPmw3O6/mKruLAgMBAAEwDQYJKoZIhvcN
+-AQEFBQADgYEACzoHUF8UV2Z6541Q2wKEA0UFUzmUjf/E1XwBO+1P15ZZ64uw34B4
+-1RwMPtAo9RY/PmICTWtNxWGxkzwb2JtDWtnxVER/lF8k2XcXPE76fxTHJF/BKk9J
+-QU8OTD1dd9gHCBviQB9TqntRZ5X7axjtuWjb2umY+owBYzAHZkp1HKI=
+------END CERTIFICATE-----
+diff --git a/packages/pac-proxy-agent/test/ssl-cert-snakeoil.key b/packages/pac-proxy-agent/test/ssl-cert-snakeoil.key
+deleted file mode 100644
+index fd12501..0000000
+--- a/packages/pac-proxy-agent/test/ssl-cert-snakeoil.key
++++ /dev/null
+@@ -1,15 +0,0 @@
+------BEGIN RSA PRIVATE KEY-----
+-MIICWwIBAAKBgQCzURxIqzer0ACAbX/lHdsn4Gd9PLKrf7EeDYfIdV0HZKPD8WDr
+-bBx2/fBu0OW2sjnzv/SVZbJ0DAuPE/p0+eT0qb2qC10iz9iTD7ribd7gxhirVb8y
+-b3fBjXsxc8V8p4Ny1LcvNSqCjwUbJqdRogfoJeTiqPM58z5sNzuv5iq7iwIDAQAB
+-AoGAPMQy4olrP0UotlzlJ36bowLP70ffgHCwU+/f4NWs5fF78c3du0oSx1w820Dd
+-Z7E0JF8bgnlJJTxjumPZz0RUCugrEHBKJmzEz3cxF5E3+7NvteZcjKn9D67RrM5x
+-1/uSZ9cqKE9cYvY4fSuHx18diyZ4axR/wB1Pea2utjjDM+ECQQDb9ZbmmaWMiRpQ
+-5Up+loxP7BZNPsEVsm+DVJmEFbaFgGfncWBqSIqnPNjMwTwj0OigTwCAEGPkfRVW
+-T0pbYWCxAkEA0LK7SCTwzyDmhASUalk0x+3uCAA6ryFdwJf/wd8TRAvVOmkTEldX
+-uJ7ldLvfrONYO3v56uKTU/SoNdZYzKtO+wJAX2KM4ctXYy5BXztPpr2acz4qHa1N
+-Bh+vBAC34fOYhyQ76r3b1btHhWZ5jbFuZwm9F2erC94Ps5IaoqcX07DSwQJAPKGw
+-h2U0EPkd/3zVIZCJJQya+vgWFIs9EZcXVtvYXQyTBkVApTN66MhBIYjzkub5205J
+-bVQmOV37AKklY1DhwQJAA1wos0cYxro02edzatxd0DIR2r4qqOqLkw6BhYHhq6HJ
+-ZvIcQkHqdSXzdETFc01I1znDGGIrJHcnvKWgBPoEUg==
+------END RSA PRIVATE KEY-----
+diff --git a/packages/pac-proxy-agent/test/ssl-cert-snakeoil.pem b/packages/pac-proxy-agent/test/ssl-cert-snakeoil.pem
+deleted file mode 100644
+index b115a5e..0000000
+--- a/packages/pac-proxy-agent/test/ssl-cert-snakeoil.pem
++++ /dev/null
+@@ -1,12 +0,0 @@
+------BEGIN CERTIFICATE-----
+-MIIB1TCCAT4CCQDV5mPlzm9+izANBgkqhkiG9w0BAQUFADAvMS0wKwYDVQQDEyQ3
+-NTI3YmQ3Ny1hYjNlLTQ3NGItYWNlNy1lZWQ2MDUzOTMxZTcwHhcNMTUwNzA2MjI0
+-NTA3WhcNMjUwNzAzMjI0NTA3WjAvMS0wKwYDVQQDEyQ3NTI3YmQ3Ny1hYjNlLTQ3
+-NGItYWNlNy1lZWQ2MDUzOTMxZTcwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGB
+-ALNRHEirN6vQAIBtf+Ud2yfgZ308sqt/sR4Nh8h1XQdko8PxYOtsHHb98G7Q5bay
+-OfO/9JVlsnQMC48T+nT55PSpvaoLXSLP2JMPuuJt3uDGGKtVvzJvd8GNezFzxXyn
+-g3LUty81KoKPBRsmp1GiB+gl5OKo8znzPmw3O6/mKruLAgMBAAEwDQYJKoZIhvcN
+-AQEFBQADgYEACzoHUF8UV2Z6541Q2wKEA0UFUzmUjf/E1XwBO+1P15ZZ64uw34B4
+-1RwMPtAo9RY/PmICTWtNxWGxkzwb2JtDWtnxVER/lF8k2XcXPE76fxTHJF/BKk9J
+-QU8OTD1dd9gHCBviQB9TqntRZ5X7axjtuWjb2umY+owBYzAHZkp1HKI=
+------END CERTIFICATE-----
+diff --git a/packages/proxy-agent/test/ssl-cert-snakeoil.key b/packages/proxy-agent/test/ssl-cert-snakeoil.key
+deleted file mode 100644
+index fd12501..0000000
+--- a/packages/proxy-agent/test/ssl-cert-snakeoil.key
++++ /dev/null
+@@ -1,15 +0,0 @@
+------BEGIN RSA PRIVATE KEY-----
+-MIICWwIBAAKBgQCzURxIqzer0ACAbX/lHdsn4Gd9PLKrf7EeDYfIdV0HZKPD8WDr
+-bBx2/fBu0OW2sjnzv/SVZbJ0DAuPE/p0+eT0qb2qC10iz9iTD7ribd7gxhirVb8y
+-b3fBjXsxc8V8p4Ny1LcvNSqCjwUbJqdRogfoJeTiqPM58z5sNzuv5iq7iwIDAQAB
+-AoGAPMQy4olrP0UotlzlJ36bowLP70ffgHCwU+/f4NWs5fF78c3du0oSx1w820Dd
+-Z7E0JF8bgnlJJTxjumPZz0RUCugrEHBKJmzEz3cxF5E3+7NvteZcjKn9D67RrM5x
+-1/uSZ9cqKE9cYvY4fSuHx18diyZ4axR/wB1Pea2utjjDM+ECQQDb9ZbmmaWMiRpQ
+-5Up+loxP7BZNPsEVsm+DVJmEFbaFgGfncWBqSIqnPNjMwTwj0OigTwCAEGPkfRVW
+-T0pbYWCxAkEA0LK7SCTwzyDmhASUalk0x+3uCAA6ryFdwJf/wd8TRAvVOmkTEldX
+-uJ7ldLvfrONYO3v56uKTU/SoNdZYzKtO+wJAX2KM4ctXYy5BXztPpr2acz4qHa1N
+-Bh+vBAC34fOYhyQ76r3b1btHhWZ5jbFuZwm9F2erC94Ps5IaoqcX07DSwQJAPKGw
+-h2U0EPkd/3zVIZCJJQya+vgWFIs9EZcXVtvYXQyTBkVApTN66MhBIYjzkub5205J
+-bVQmOV37AKklY1DhwQJAA1wos0cYxro02edzatxd0DIR2r4qqOqLkw6BhYHhq6HJ
+-ZvIcQkHqdSXzdETFc01I1znDGGIrJHcnvKWgBPoEUg==
+------END RSA PRIVATE KEY-----
+diff --git a/packages/proxy-agent/test/ssl-cert-snakeoil.pem b/packages/proxy-agent/test/ssl-cert-snakeoil.pem
+deleted file mode 100644
+index b115a5e..0000000
+--- a/packages/proxy-agent/test/ssl-cert-snakeoil.pem
++++ /dev/null
+@@ -1,12 +0,0 @@
+------BEGIN CERTIFICATE-----
+-MIIB1TCCAT4CCQDV5mPlzm9+izANBgkqhkiG9w0BAQUFADAvMS0wKwYDVQQDEyQ3
+-NTI3YmQ3Ny1hYjNlLTQ3NGItYWNlNy1lZWQ2MDUzOTMxZTcwHhcNMTUwNzA2MjI0
+-NTA3WhcNMjUwNzAzMjI0NTA3WjAvMS0wKwYDVQQDEyQ3NTI3YmQ3Ny1hYjNlLTQ3
+-NGItYWNlNy1lZWQ2MDUzOTMxZTcwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGB
+-ALNRHEirN6vQAIBtf+Ud2yfgZ308sqt/sR4Nh8h1XQdko8PxYOtsHHb98G7Q5bay
+-OfO/9JVlsnQMC48T+nT55PSpvaoLXSLP2JMPuuJt3uDGGKtVvzJvd8GNezFzxXyn
+-g3LUty81KoKPBRsmp1GiB+gl5OKo8znzPmw3O6/mKruLAgMBAAEwDQYJKoZIhvcN
+-AQEFBQADgYEACzoHUF8UV2Z6541Q2wKEA0UFUzmUjf/E1XwBO+1P15ZZ64uw34B4
+-1RwMPtAo9RY/PmICTWtNxWGxkzwb2JtDWtnxVER/lF8k2XcXPE76fxTHJF/BKk9J
+-QU8OTD1dd9gHCBviQB9TqntRZ5X7axjtuWjb2umY+owBYzAHZkp1HKI=
+------END CERTIFICATE-----
+diff --git a/packages/socks-proxy-agent/test/ssl-cert-snakeoil.key b/packages/socks-proxy-agent/test/ssl-cert-snakeoil.key
+deleted file mode 100644
+index fd12501..0000000
+--- a/packages/socks-proxy-agent/test/ssl-cert-snakeoil.key
++++ /dev/null
+@@ -1,15 +0,0 @@
+------BEGIN RSA PRIVATE KEY-----
+-MIICWwIBAAKBgQCzURxIqzer0ACAbX/lHdsn4Gd9PLKrf7EeDYfIdV0HZKPD8WDr
+-bBx2/fBu0OW2sjnzv/SVZbJ0DAuPE/p0+eT0qb2qC10iz9iTD7ribd7gxhirVb8y
+-b3fBjXsxc8V8p4Ny1LcvNSqCjwUbJqdRogfoJeTiqPM58z5sNzuv5iq7iwIDAQAB
+-AoGAPMQy4olrP0UotlzlJ36bowLP70ffgHCwU+/f4NWs5fF78c3du0oSx1w820Dd
+-Z7E0JF8bgnlJJTxjumPZz0RUCugrEHBKJmzEz3cxF5E3+7NvteZcjKn9D67RrM5x
+-1/uSZ9cqKE9cYvY4fSuHx18diyZ4axR/wB1Pea2utjjDM+ECQQDb9ZbmmaWMiRpQ
+-5Up+loxP7BZNPsEVsm+DVJmEFbaFgGfncWBqSIqnPNjMwTwj0OigTwCAEGPkfRVW
+-T0pbYWCxAkEA0LK7SCTwzyDmhASUalk0x+3uCAA6ryFdwJf/wd8TRAvVOmkTEldX
+-uJ7ldLvfrONYO3v56uKTU/SoNdZYzKtO+wJAX2KM4ctXYy5BXztPpr2acz4qHa1N
+-Bh+vBAC34fOYhyQ76r3b1btHhWZ5jbFuZwm9F2erC94Ps5IaoqcX07DSwQJAPKGw
+-h2U0EPkd/3zVIZCJJQya+vgWFIs9EZcXVtvYXQyTBkVApTN66MhBIYjzkub5205J
+-bVQmOV37AKklY1DhwQJAA1wos0cYxro02edzatxd0DIR2r4qqOqLkw6BhYHhq6HJ
+-ZvIcQkHqdSXzdETFc01I1znDGGIrJHcnvKWgBPoEUg==
+------END RSA PRIVATE KEY-----
+diff --git a/packages/socks-proxy-agent/test/ssl-cert-snakeoil.pem b/packages/socks-proxy-agent/test/ssl-cert-snakeoil.pem
+deleted file mode 100644
+index b115a5e..0000000
+--- a/packages/socks-proxy-agent/test/ssl-cert-snakeoil.pem
++++ /dev/null
+@@ -1,12 +0,0 @@
+------BEGIN CERTIFICATE-----
+-MIIB1TCCAT4CCQDV5mPlzm9+izANBgkqhkiG9w0BAQUFADAvMS0wKwYDVQQDEyQ3
+-NTI3YmQ3Ny1hYjNlLTQ3NGItYWNlNy1lZWQ2MDUzOTMxZTcwHhcNMTUwNzA2MjI0
+-NTA3WhcNMjUwNzAzMjI0NTA3WjAvMS0wKwYDVQQDEyQ3NTI3YmQ3Ny1hYjNlLTQ3
+-NGItYWNlNy1lZWQ2MDUzOTMxZTcwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGB
+-ALNRHEirN6vQAIBtf+Ud2yfgZ308sqt/sR4Nh8h1XQdko8PxYOtsHHb98G7Q5bay
+-OfO/9JVlsnQMC48T+nT55PSpvaoLXSLP2JMPuuJt3uDGGKtVvzJvd8GNezFzxXyn
+-g3LUty81KoKPBRsmp1GiB+gl5OKo8znzPmw3O6/mKruLAgMBAAEwDQYJKoZIhvcN
+-AQEFBQADgYEACzoHUF8UV2Z6541Q2wKEA0UFUzmUjf/E1XwBO+1P15ZZ64uw34B4
+-1RwMPtAo9RY/PmICTWtNxWGxkzwb2JtDWtnxVER/lF8k2XcXPE76fxTHJF/BKk9J
+-QU8OTD1dd9gHCBviQB9TqntRZ5X7axjtuWjb2umY+owBYzAHZkp1HKI=
+------END CERTIFICATE-----

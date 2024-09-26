@@ -1,4 +1,52 @@
 #!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+include /usr/share/dpkg/pkg-info.mk
 
 %:
 	dh $@
+
+override_dh_auto_build: generate-cert
+	rm -rf packages/*/dist
+	ln -s ../packages/tsconfig node_modules/ || true
+	set -e; for p in basic-ftp `cat debian/nodejs/build_order`; do \
+		echo "# $$p"; \
+		(cd $$p && tsc); \
+	done
+
+override_dh_auto_test:
+	# autopkgtest only due to circular dependencies
+
+override_dh_auto_clean:
+	set -e; for P in  agent-base https-proxy-agent https-proxy-agent pac-proxy-agent proxy-agent socks-proxy-agent; do\
+		(set -e ;cd packages/$$P/test/ && rm -f ssl-cert-snakeoil.*) \
+	done
+	rm -f debian/cert.cnf
+
+override_dh_installdocs:
+	dh_installdocs
+	dh_nodejs_autodocs auto_dispatch
+
+override_dh_gencontrol:
+	set -e; for p in `pkgjs-utils components_list|grep -v types-` packages/proxy-agent; do \
+		NAME=`pkgjs-pjson $$p name`; \
+		VERSION=`pkgjs-pjson $$p version`; \
+		PACKAGE=node-`pkgjs-utils normalize_name $$NAME`; \
+		dh_gencontrol -p$$PACKAGE -- -v$$VERSION~$(DEB_VERSION); \
+	done
+
+override_dh_fixperms:
+	dh_fixperms
+	chmod +x debian/node-proxy/usr/share/nodejs/proxy/dist/bin/proxy.js
+
+OPENSSLSNAKEOIL=openssl req -config $(CURDIR)/debian/cert.cnf -new -x509 -days "365" -nodes -sha256 -out ./ssl-cert-snakeoil.pem -keyout ./ssl-cert-snakeoil.key
+
+.PHONY: generate-cert
+generate-cert:
+	HostName="$$(hostname -f)"; SubjectAltName="DNS:$$HostName"; sed -e s#@HostName@#"$$HostName"# -e s#@SubjectAltName@#"$$SubjectAltName"# /usr/share/ssl-cert/ssleay.cnf > debian/cert.cnf
+	set -e; for P in agent-base http-proxy-agent https-proxy-agent pac-proxy-agent proxy-agent socks-proxy-agent; do\
+		(set -e ; cd packages/$$P/test/ && $(OPENSSLSNAKEOIL)) \
+	done

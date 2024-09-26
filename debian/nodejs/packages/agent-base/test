@@ -1,0 +1,1 @@
+jest --testTimeout 50000 --env node --moduleDirectories node_modules

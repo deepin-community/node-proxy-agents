@@ -1,0 +1,29 @@
+version=4
+opts=\
+mode=git,\
+date=%Y%m%d%H,\
+dversionmangle=auto,\
+pgpmode=none,\
+pretty=0~%cd \
+ https://github.com/TooTallNate/proxy-agents.git HEAD group
+
+opts=\
+component=basic-ftp,\
+ctype=nodejs,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-basic-ftp-$1/ \
+ https://github.com/patrickjuchli/basic-ftp/tags .*/archive.*/v?([\d\.]+).tar.gz ignore
+
+opts=\
+component=args,\
+ctype=nodejs,\
+dversionmangle=auto,\
+filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-args-$1/ \
+ https://github.com/leo/args/tags .*/archive.*/v?([\d\.]+).tar.gz ignore
+
+opts=\
+searchmode=plain,\
+component=types-args,\
+ctype=nodejs,pgpmode=none,\
+filenamemangle=s/^.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-types-args-$1/ \
+ https://registry.npmjs.org/@types/args https://registry.npmjs.org/@types/args/-/args-([\d\.]+)@ARCHIVE_EXT@ ignore

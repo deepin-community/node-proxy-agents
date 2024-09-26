@@ -1,15 +1,183 @@
-Source: template-repository
-Section: unknown
+Source: node-proxy-agents
+Section: javascript
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Uploaders: Israel Galadima <izzygaladima@gmail.com>
+Testsuite: autopkgtest-pkg-nodejs
+Build-Depends:
+ debhelper-compat (= 13)
+ , dh-sequence-nodejs
+ , dh-nodejs
+ , node-ast-types
+ , node-data-uri-to-buffer
+ , node-debug
+ , node-escodegen
+ , node-esprima
+ , node-fs-extra
+ , node-ip
+ , node-lru-cache (>> 10.0.1-2~)
+ , node-netmask
+ , node-proxy-from-env
+ , node-quickjs-emscripten
+ , node-socks
+ , node-typescript
+ , node-types-estree
+ , ssl-cert
+Standards-Version: 4.6.2
+Homepage: https://github.com/TooTallNate/proxy-agents#readme
+Vcs-Git: https://salsa.debian.org/js-team/node-proxy-agents.git
+Vcs-Browser: https://salsa.debian.org/js-team/node-proxy-agents
+Rules-Requires-Root: no
 
-Package: template-repository
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Package: node-agent-base
+Architecture: all
+Depends: ${misc:Depends}
+ , node-debug
+Multi-Arch: foreign
+Description: Node.js wrapper around http.Agent class
+ node-agent-base provides an abstract class that must define a connect()
+ function which is responsible for creating the underlying socket that the
+ HTTP client requests will use.
+
+Package: node-args
+Architecture: all
+Depends: ${misc:Depends}
+ , node-camelcase
+ , node-chalk
+ , node-leven
+ , node-mri
+Provides: ${nodeArgs:Provides}
+Description: Node.js module to create command line interfaces
+ node-args makes creating command line interfaces a breeze.
+
+Package: node-basic-ftp
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: FTP client library for Node.js
+ node-basic-ftp is an FTP client library for Node.js. It supports FTPS over
+ TLS, Passive Mode over IPv6, has a Promise-based API, and offers methods to
+ operate on whole directories.
+
+Package: node-data-uri-to-buffer
+Architecture: all
+Depends: ${misc:Depends}
+Breaks: node-fetch (<< 3.3.2+~cs11.4.11-2~)
+Multi-Arch: foreign
+Description: Node.js module that generate a Buffer instance from a Data URI string
+ node-data-uri-to-buffer accepts a "data" URI string of data and returns a
+ Node.js Buffer instance with the decoded data.
+
+Package: node-degenerator
+Architecture: all
+Depends: ${misc:Depends}
+ , node-ast-types
+ , node-escodegen
+ , node-esprima
+Description: Node.js module that compiles sync functions into async functions
+ node-degenerator takes a String to one or more synchronous JavaScript
+ functions, and returns a new String that with those JS functions transpiled
+ into async functions.
+
+Package: node-get-uri
+Architecture: all
+Depends: ${misc:Depends}
+ , node-data-uri-to-buffer (>= 5)
+ , node-debug
+ , node-fs-extra
+Multi-Arch: foreign
+Description: Node.js module that returns a stream.Readable from a URI string
+ node-get-uri is a high-level module. It accepts a URI string and returns a
+ Readable stream instance. There is built-in support for a variety of
+ "protocols", and it's asily extensible.
+
+Package: node-http-proxy-agent
+Architecture: all
+Depends: ${misc:Depends}
+ , node-agent-base (>= 7)
+Breaks: node-https-proxy-agent (<< 7)
+Replaces: node-https-proxy-agent (<< 7)
+Multi-Arch: foreign
+Description: HTTP(s) proxy http.Agent implementation for HTTP
+ node-http-proxy-agent provides an http.Agent implementation that connects
+ to a specified HTTP or HTTPS proxy server, and can be used with the built-in
+ http module.
+
+Package: node-https-proxy-agent
+Architecture: all
+Depends: ${misc:Depends}
+ , node-agent-base (>= 7)
+Breaks: node-gyp (<< 9.3.0-3~)
+ , node-jsdom (<< 20.0.3+~cs124.18.21-2~)
+ , node-pre-gyp (<< 1.0.10+~2.0.1-2~)
+ , node-ws (<< 8.11.0+~cs13.7.3-2~)
+Multi-Arch: foreign
+Description: HTTP(s) proxy http.Agent implementation for HTTPS
+ node-http-proxy-agent provides an http.Agent implementation that connects
+ to a specified HTTP or HTTPS proxy server, and can be used with the built-in
+ https module.
+ .
+ Specifically, this Agent implementation connects to an intermediary "proxy"
+ server and issues the CONNECT HTTP method, which tells the proxy to open a
+ direct TCP connection to the destination server.
+
+Package: node-pac-proxy-agent
+Architecture: all
+Depends: ${misc:Depends}
+ , node-get-uri
+ , node-http-proxy-agent (>= 7)
+ , node-https-proxy-agent (>= 7)
+ , node-ip
+ , node-netmask
+ , node-pac-resolver
+ , node-quickjs-emscripten
+ , node-socks-proxy-agent (>= 8)
+Description: PAC file proxy http.Agent implementation for HTTP and HTTPS
+ node-pac-proxy-agent provides an `http.Agent` implementation that retreives
+ the specified PAC proxy file and uses it to resolve which HTTP, HTTPS, or
+ SOCKS proxy, or if a direct connection should be used to connect to the HTTP
+ endpoint.
+
+Package: node-pac-resolver
+Architecture: all
+Depends: ${misc:Depends}
+ , node-degenerator
+Description: Node.js module that generates an asynchronous resolver function from a PAC file
+ node-pac-resolver accepts a JavaScript String of code, which is meant to be
+ a PAC proxy file, and returns a generated asynchronous FindProxyForURL()
+ functions.
+
+Package: node-proxy
+Architecture: all
+Depends: ${misc:Depends}
+ , node-args
+ , nodejs:any
+Breaks: node-https-proxy-agent (<< 7)
+Description: Node.js HTTP proxy
+ node-proxy provides standard "HTTP proxy" logic that allows one to script
+ its own server using the node-proxy server API.
+
+Package: node-socks-proxy-agent
+Architecture: all
+Depends: ${misc:Depends}
+ , node-agent-base (>= 7)
+ , node-socks
+Description: SOCKS proxy http.Agent implementation for HTTP and HTTPS
+ node-socks-proxy-agent provides an http.Agent implementation that connects
+ to a specified SOCKS proxy server, and can be used with the built-in http
+ and https modules.
+
+Package: node-proxy-agent
+Architecture: all
+Depends:
+ ${misc:Depends}
+ , node-http-proxy-agent (>= 7)
+ , node-https-proxy-agent (>= 7)
+ , node-lru-cache (>> 10.0.1-2~)
+ , node-pac-proxy-agent
+ , node-proxy-from-env
+ , node-socks-proxy-agent (>= 8)
+Description: Maps proxy protocols to http.Agent implementations
+ This module provides an http.Agent implementation which automatically uses
+ proxy servers based off of the various proxy-related environment variables
+ (`HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY` among others).

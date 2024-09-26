@@ -1,0 +1,36 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Thu, 1 Aug 2024 09:30:12 +0000
+Subject: Use modern lru-cache
+
+forwarded: not-needed
+---
+ packages/proxy-agent/package.json | 2 +-
+ packages/proxy-agent/src/index.ts | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/packages/proxy-agent/package.json b/packages/proxy-agent/package.json
+index 9980b12..6401074 100644
+--- a/packages/proxy-agent/package.json
++++ b/packages/proxy-agent/package.json
+@@ -36,7 +36,7 @@
+     "debug": "^4.3.4",
+     "http-proxy-agent": "^7.0.1",
+     "https-proxy-agent": "^7.0.3",
+-    "lru-cache": "^7.14.1",
++    "lru-cache": "^10.0.1",
+     "pac-proxy-agent": "^7.0.1",
+     "proxy-from-env": "^1.1.0",
+     "socks-proxy-agent": "^8.0.2"
+diff --git a/packages/proxy-agent/src/index.ts b/packages/proxy-agent/src/index.ts
+index 496e185..f5076f8 100644
+--- a/packages/proxy-agent/src/index.ts
++++ b/packages/proxy-agent/src/index.ts
+@@ -1,7 +1,7 @@
+ import * as http from 'http';
+ import * as https from 'https';
+ import { URL } from 'url';
+-import LRUCache from 'lru-cache';
++import { LRUCache } from 'lru-cache';
+ import { Agent, AgentConnectOpts } from 'agent-base';
+ import createDebug from 'debug';
+ import { getProxyForUrl as envGetProxyForUrl } from 'proxy-from-env';
