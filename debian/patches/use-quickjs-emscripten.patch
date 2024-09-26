@@ -1,0 +1,79 @@
+From: Yadd <yadd@debian.org>
+Date: Thu, 1 Aug 2024 09:28:06 +0000
+Subject: use quickjs-emscripten
+
+Forwarded: not-needed
+Last-Update: 2023-11-28
+---
+ packages/degenerator/src/compile.ts   | 2 +-
+ packages/degenerator/test/test.ts     | 2 +-
+ packages/pac-proxy-agent/src/index.ts | 2 +-
+ packages/pac-resolver/src/index.ts    | 2 +-
+ packages/pac-resolver/test/test.ts    | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/packages/degenerator/src/compile.ts b/packages/degenerator/src/compile.ts
+index 3a24a73..e4dd586 100644
+--- a/packages/degenerator/src/compile.ts
++++ b/packages/degenerator/src/compile.ts
+@@ -5,7 +5,7 @@ import type {
+ 	QuickJSContext,
+ 	QuickJSHandle,
+ 	QuickJSWASMModule,
+-} from '@tootallnate/quickjs-emscripten';
++} from 'quickjs-emscripten';
+ import type { DegeneratorNames } from './degenerator';
+ 
+ export interface CompileOptions {
+diff --git a/packages/degenerator/test/test.ts b/packages/degenerator/test/test.ts
+index 2c13ef4..1ac069a 100644
+--- a/packages/degenerator/test/test.ts
++++ b/packages/degenerator/test/test.ts
+@@ -5,7 +5,7 @@ import { degenerator, compile } from '../src';
+ import {
+ 	getQuickJS,
+ 	type QuickJSWASMModule,
+-} from '@tootallnate/quickjs-emscripten';
++} from 'quickjs-emscripten';
+ 
+ describe('degenerator()', () => {
+ 	it('should support "async" output functions', () => {
+diff --git a/packages/pac-proxy-agent/src/index.ts b/packages/pac-proxy-agent/src/index.ts
+index 57aa06d..9d83bd2 100644
+--- a/packages/pac-proxy-agent/src/index.ts
++++ b/packages/pac-proxy-agent/src/index.ts
+@@ -20,7 +20,7 @@ import {
+ 	FindProxyForURL,
+ 	PacResolverOptions,
+ } from 'pac-resolver';
+-import { getQuickJS } from '@tootallnate/quickjs-emscripten';
++import { getQuickJS } from 'quickjs-emscripten';
+ 
+ const debug = createDebug('pac-proxy-agent');
+ 
+diff --git a/packages/pac-resolver/src/index.ts b/packages/pac-resolver/src/index.ts
+index 13b6e99..cae0e67 100644
+--- a/packages/pac-resolver/src/index.ts
++++ b/packages/pac-resolver/src/index.ts
+@@ -16,7 +16,7 @@ import myIpAddress from './myIpAddress';
+ import shExpMatch from './shExpMatch';
+ import timeRange from './timeRange';
+ import weekdayRange from './weekdayRange';
+-import type { QuickJSWASMModule } from '@tootallnate/quickjs-emscripten';
++import type { QuickJSWASMModule } from 'quickjs-emscripten';
+ 
+ /**
+  * Returns an asynchronous `FindProxyForURL()` function
+diff --git a/packages/pac-resolver/test/test.ts b/packages/pac-resolver/test/test.ts
+index 0c91d20..c7f90f5 100644
+--- a/packages/pac-resolver/test/test.ts
++++ b/packages/pac-resolver/test/test.ts
+@@ -5,7 +5,7 @@ import { createPacResolver } from '../src';
+ import {
+ 	getQuickJS,
+ 	type QuickJSWASMModule,
+-} from '@tootallnate/quickjs-emscripten';
++} from 'quickjs-emscripten';
+ 
+ type FindProxyForURLFn = ReturnType<typeof createPacResolver>;
+ 

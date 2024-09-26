@@ -1,0 +1,12 @@
+data-uri-to-buffer
+lru-cache
+quickjs-emscripten
+socks
+@types/debug
+@types/escodegen
+@types/esprima
+@types/fs-extra
+@types/ip
+@types/netmask
+@types/node
+@types/proxy-from-env

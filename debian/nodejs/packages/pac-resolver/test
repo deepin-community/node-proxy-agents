@@ -1,0 +1,11 @@
+ARCH=`dpkg-architecture -qDEB_BUILD_GNU_TYPE`
+if test "$ARCH" = "${ARCH#s390*}"; then
+	jest --testTimeout 50000 --env node \
+		--moduleDirectories node_modules \
+		--testRegex 'test/*.test.ts' \
+		--testPathIgnorePatterns test/dnsResolve.test.ts \
+			test/isResolvable.test.ts \
+			test/myIpAddress.test.ts
+else
+        echo "This test is skipped on s390x"
+fi

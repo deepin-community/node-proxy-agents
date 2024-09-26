@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "declaration": true,
+        "outDir": "dist",
+        "baseUrl": ".",
+        "target": "ES2018",
+        "lib": ["ES2018"],
+        "allowJs": false,
+        "strict": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true,
+        "noImplicitReturns": true,
+        "skipLibCheck": true,
+        "types": ["node"]
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}

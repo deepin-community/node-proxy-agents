@@ -1,5 +1,76 @@
-template-repository (1.0-1) unstable; urgency=medium
+node-proxy-agents (0~2024040606-4) unstable; urgency=medium
 
-  * Initial release
+  * Team upload
+  * Do not use default import for node-lru-cache
+  * Regenerate cert at build time for testing
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Bastien Roucariès <rouca@debian.org>  Thu, 01 Aug 2024 09:32:11 +0000
+
+node-proxy-agents (0~2024040606-3) unstable; urgency=medium
+
+  * Team upload
+  * Indicates that node-data-uri-to-buffer 6 breaks
+    node-fetch < 3.3.2+~cs11.4.11-2~
+
+ -- Yadd <yadd@debian.org>  Mon, 22 Apr 2024 13:06:44 +0400
+
+node-proxy-agents (0~2024040606-2) unstable; urgency=medium
+
+  * Team upload
+  * Update tsc patch (@types/node changes)
+
+ -- Yadd <yadd@debian.org>  Fri, 19 Apr 2024 07:04:17 +0400
+
+node-proxy-agents (0~2024040606-1) unstable; urgency=medium
+
+  * Team upload
+  * Apply multi-arch hints (node-get-uri, node-http*-proxy-agent => foreign)
+  * New upstream version 0~2024040606
+  * Refresh patches
+
+ -- Yadd <yadd@debian.org>  Sun, 07 Apr 2024 08:00:34 +0400
+
+node-proxy-agents (0~2023071921-5) unstable; urgency=medium
+
+  * Team upload
+  * Drop build dependency to node-tslib (test only)
+  * Apply multi-arch hints
+  * Drop emscripten tests on s390x
+
+ -- Yadd <yadd@debian.org>  Wed, 29 Nov 2023 11:45:38 +0400
+
+node-proxy-agents (0~2023071921-4) unstable; urgency=medium
+
+  * Team upload
+  * Test only during autopkgtest to avoid circular dependencies
+
+ -- Yadd <yadd@debian.org>  Fri, 24 Nov 2023 07:11:13 +0400
+
+node-proxy-agents (0~2023071921-3) unstable; urgency=medium
+
+  * Team upload
+  * Add missing Breaks+Replaces node-https-proxy-agent < 7 in
+    node-http-proxy-agent (Closes: #1055862)
+  * Drop tests that needs Internet (Closes: #1056599)
+
+ -- Yadd <yadd@debian.org>  Fri, 24 Nov 2023 06:22:44 +0400
+
+node-proxy-agents (0~2023071921-2) unstable; urgency=medium
+
+  * Team upload
+  * Update tsc patch
+  * Update test timeout
+  * Fix test for pac-resolver
+  * node-proxy: add dependency to nodejs:any
+  * Add breaks fields (node-fetch, node-jsdom, node-gyp, node-pre-gyp,
+    node-ws)
+  * Back to unstable
+
+ -- Yadd <yadd@debian.org>  Thu, 23 Nov 2023 11:47:05 +0400
+
+node-proxy-agents (0~2023071921-1) experimental; urgency=medium
+
+  [ Israel Galadima, Yadd ]
+  * Initial release (Closes: #1039524)
+
+ -- Yadd <yadd@debian.org>  Sun, 13 Aug 2023 20:34:12 +0400

@@ -1,0 +1,4 @@
+# Doc
+very-long-line-length-in-source-file * [*/*.md:*]
+# Test fixtures
+very-long-line-length-in-source-file * [packages/*/test/fixtures/*]

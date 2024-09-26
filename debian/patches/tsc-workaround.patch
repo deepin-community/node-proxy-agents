@@ -1,0 +1,158 @@
+From: Yadd <yadd@debian.org>
+Date: Thu, 1 Aug 2024 09:28:06 +0000
+Subject: tsc workarounds
+
+Forwarded: not-needed
+Last-Update: 2023-11-11
+---
+ packages/degenerator/src/compile.ts     | 10 ++++++++++
+ packages/degenerator/src/degenerator.ts |  5 +++++
+ packages/get-uri/tsconfig.json          |  3 ++-
+ packages/https-proxy-agent/src/index.ts |  1 +
+ packages/https-proxy-agent/test/test.ts |  1 +
+ packages/socks-proxy-agent/src/index.ts |  1 +
+ packages/tsconfig/base.json             |  3 +--
+ 7 files changed, 21 insertions(+), 3 deletions(-)
+
+diff --git a/packages/degenerator/src/compile.ts b/packages/degenerator/src/compile.ts
+index e4dd586..2e25138 100644
+--- a/packages/degenerator/src/compile.ts
++++ b/packages/degenerator/src/compile.ts
+@@ -68,20 +68,30 @@ export function compile<R = unknown, A extends unknown[] = []>(
+ 			resolvedHandle = vm.unwrapResult(resolvedResult);
+ 			return quickJSHandleToHost(vm, resolvedHandle);
+ 		} catch (err: unknown) {
++// @ts-ignore
+ 			if (err && typeof err === 'object' && 'cause' in err && err.cause) {
+ 				if (
++// @ts-ignore
+ 					typeof err.cause === 'object' &&
++// @ts-ignore
+ 					'stack' in err.cause &&
++// @ts-ignore
+ 					'name' in err.cause &&
++// @ts-ignore
+ 					'message' in err.cause &&
++// @ts-ignore
+ 					typeof err.cause.stack === 'string' &&
++// @ts-ignore
+ 					typeof err.cause.name === 'string' &&
++// @ts-ignore
+ 					typeof err.cause.message === 'string'
+ 				) {
+ 					// QuickJS Error `stack` does not include the name +
+ 					// message, so patch those in to behave more like V8
++// @ts-ignore
+ 					err.cause.stack = `${err.cause.name}: ${err.cause.message}\n${err.cause.stack}`;
+ 				}
++// @ts-ignore
+ 				throw err.cause;
+ 			}
+ 			throw err;
+diff --git a/packages/degenerator/src/degenerator.ts b/packages/degenerator/src/degenerator.ts
+index 463cba0..2a3f0e2 100644
+--- a/packages/degenerator/src/degenerator.ts
++++ b/packages/degenerator/src/degenerator.ts
+@@ -33,6 +33,7 @@ export function degenerator(code: string, _names: DegeneratorNames): string {
+ 	let lastNamesLength = 0;
+ 	do {
+ 		lastNamesLength = names.length;
++// @ts-ignore
+ 		visit(ast, {
+ 			visitVariableDeclaration(path) {
+ 				if (path.node.declarations) {
+@@ -83,7 +84,9 @@ export function degenerator(code: string, _names: DegeneratorNames): string {
+ 					path.node.async = true;
+ 
+ 					// Add function name to `names` array
++// @ts-ignore
+ 					if (!checkName(path.node.id.name, names)) {
++// @ts-ignore
+ 						names.push(path.node.id.name);
+ 					}
+ 				}
+@@ -95,6 +98,7 @@ export function degenerator(code: string, _names: DegeneratorNames): string {
+ 
+ 	// Second pass is for adding `await` statements to any function
+ 	// invocations that match the given `names` array.
++// @ts-ignore
+ 	visit(ast, {
+ 		visitCallExpression(path) {
+ 			if (checkNames(path.node, names)) {
+@@ -150,6 +154,7 @@ function checkNames(
+ 		}
+ 	} else if (n.FunctionExpression.check(callee)) {
+ 		if (callee.id) {
++// @ts-ignore
+ 			name = callee.id.name;
+ 		} else {
+ 			return false;
+diff --git a/packages/get-uri/tsconfig.json b/packages/get-uri/tsconfig.json
+index d43bf6a..9f23e73 100644
+--- a/packages/get-uri/tsconfig.json
++++ b/packages/get-uri/tsconfig.json
+@@ -10,7 +10,8 @@
+     "declaration": true,
+     "typeRoots": [
+       "./@types",
+-      "./node_modules/@types"
++      "./node_modules/@types",
++      "../../node_modules/@types"
+     ]
+   },
+   "include": ["src/**/*"],
+diff --git a/packages/https-proxy-agent/src/index.ts b/packages/https-proxy-agent/src/index.ts
+index 272f779..e6fdcce 100644
+--- a/packages/https-proxy-agent/src/index.ts
++++ b/packages/https-proxy-agent/src/index.ts
+@@ -137,6 +137,7 @@ export class HttpsProxyAgent<Uri extends string> extends Agent {
+ 
+ 		const { connect, buffered } = await proxyResponsePromise;
+ 		req.emit('proxyConnect', connect);
++// @ts-ignore
+ 		this.emit('proxyConnect', connect, req);
+ 
+ 		if (connect.statusCode === 200) {
+diff --git a/packages/https-proxy-agent/test/test.ts b/packages/https-proxy-agent/test/test.ts
+index 992c761..9e9349e 100644
+--- a/packages/https-proxy-agent/test/test.ts
++++ b/packages/https-proxy-agent/test/test.ts
+@@ -118,6 +118,7 @@ describe('HttpsProxyAgent', () => {
+ 			});
+ 
+ 			const r = req(serverUrl, { agent });
++// @ts-ignore
+ 			const [connect] = await once(agent, 'proxyConnect');
+ 			expect(connect.statusCode).toEqual(200);
+ 			expect(connect.statusText).toEqual('Connection established');
+diff --git a/packages/socks-proxy-agent/src/index.ts b/packages/socks-proxy-agent/src/index.ts
+index 7a911d2..9b1e0e1 100644
+--- a/packages/socks-proxy-agent/src/index.ts
++++ b/packages/socks-proxy-agent/src/index.ts
+@@ -133,6 +133,7 @@ export class SocksProxyAgent extends Agent {
+ 					if (err) {
+ 						reject(err);
+ 					} else {
++// @ts-ignore
+ 						resolve(res);
+ 					}
+ 				});
+diff --git a/packages/tsconfig/base.json b/packages/tsconfig/base.json
+index b28bb60..f033161 100644
+--- a/packages/tsconfig/base.json
++++ b/packages/tsconfig/base.json
+@@ -8,7 +8,6 @@
+     "forceConsistentCasingInFileNames": true,
+     "sourceMap": true,
+     "inlineSources": false,
+-    "isolatedModules": true,
+     "moduleResolution": "node",
+     "noUnusedLocals": false,
+     "noUnusedParameters": false,
+@@ -19,4 +18,4 @@
+     "lib": ["ESNext"],
+     "strict": true
+   }
+-}
+\ No newline at end of file
++}
