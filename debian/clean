@@ -1,0 +1,3 @@
+basic-ftp/dist/
+node_modules/
+packages/*/dist/

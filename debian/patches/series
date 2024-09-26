@@ -1,0 +1,4 @@
+0001-Regenerate-cert-at-build-time.patch
+use-quickjs-emscripten.patch
+tsc-workaround.patch
+0004-Use-modern-lru-cache.patch

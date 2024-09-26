@@ -1,0 +1,1 @@
+jest --env node test/test.ts --moduleDirectories node_modules
