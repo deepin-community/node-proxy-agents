@@ -1,3 +1,24 @@
+node-proxy-agents (0~2024040606-6+deb13u1) trixie; urgency=medium
+
+  * Team upload
+  * Fix basic-ftp traversal vulnerability (Closes: #1129093, CVE-2026-27699)
+
+ -- Yadd <yadd@debian.org>  Fri, 27 Feb 2026 07:58:26 +0100
+
+node-proxy-agents (0~2024040606-6) unstable; urgency=medium
+
+  * Team upload
+  * patch: fix compilation with nodejs 20.19.2
+
+ -- Jérémy Lal <kapouer@melix.org>  Tue, 20 May 2025 10:05:31 +0200
+
+node-proxy-agents (0~2024040606-5) unstable; urgency=medium
+
+  * Team upload
+  * node-get-uri Depends on node-basic-ftp. Closes: #1094198. 
+
+ -- Jérémy Lal <kapouer@melix.org>  Sat, 25 Jan 2025 23:57:35 +0100
+
 node-proxy-agents (0~2024040606-4) unstable; urgency=medium
 
   * Team upload

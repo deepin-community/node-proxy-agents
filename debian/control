@@ -85,6 +85,7 @@ Depends: ${misc:Depends}
  , node-data-uri-to-buffer (>= 5)
  , node-debug
  , node-fs-extra
+ , node-basic-ftp
 Multi-Arch: foreign
 Description: Node.js module that returns a stream.Readable from a URI string
  node-get-uri is a high-level module. It accepts a URI string and returns a

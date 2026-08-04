@@ -2,3 +2,5 @@
 use-quickjs-emscripten.patch
 tsc-workaround.patch
 0004-Use-modern-lru-cache.patch
+0005-get-uri-compilation.patch
+CVE-2026-27699.patch
